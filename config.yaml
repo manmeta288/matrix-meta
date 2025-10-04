@@ -1,0 +1,22 @@
+# This file will be auto-generated, but you can pre-configure it
+meta:
+  mode: instagram  # Critical: Sets Instagram mode
+
+homeserver:
+  address: ${HOMESERVER_ADDRESS}
+  domain: ${HOMESERVER_DOMAIN}
+
+appservice:
+  address: ${APPSERVICE_ADDRESS}
+  hostname: 0.0.0.0
+  port: ${APPSERVICE_PORT:-29319}
+  
+database:
+  type: postgres
+  uri: ${DATABASE_URL}
+
+logging:
+  min_level: info
+  writers:
+    - type: stdout
+      format: pretty-colored
