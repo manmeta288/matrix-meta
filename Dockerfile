@@ -19,6 +19,4 @@ COPY --from=builder /build/docker-run.sh /docker-run.sh
 # Add this line to set proper UID for Railway
 ENV RAILWAY_RUN_UID=0
 
-VOLUME /data
-
 CMD ["/docker-run.sh"]
