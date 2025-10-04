@@ -16,18 +16,22 @@ function fixperms {
 
 if [[ ! -f /data/config.yaml ]]; then
 	/usr/bin/mautrix-meta -c /data/config.yaml -e
-	echo "Didn't find a config file."
-	echo "Copied default config file to /data/config.yaml"
-	echo "Modify that config file to your liking."
+	
+	# ADD THIS: Set Instagram mode automatically
+	yq -I4 e -i '.meta.mode = "instagram"' /data/config.yaml
+	
+	echo "Generated config file at /data/config.yaml"
+	echo "Instagram mode has been set automatically."
+	echo "Modify config.yaml to add your homeserver details."
 	echo "Start the container again after that to generate the registration file."
 	exit
 fi
 
 if [[ ! -f /data/registration.yaml ]]; then
 	/usr/bin/mautrix-meta -g -c /data/config.yaml -r /data/registration.yaml || exit $?
-	echo "Didn't find a registration file."
-	echo "Generated one for you."
-	echo "See https://docs.mau.fi/bridges/general/registering-appservices.html on how to use it."
+	echo "Generated registration file."
+	echo "Add this to your Synapse appservice configuration."
+	echo "See https://docs.mau.fi/bridges/general/registering-appservices.html"
 	exit
 fi
 
